@@ -16,7 +16,6 @@ public class Assign215dec {
 
 	@BeforeMethod
 	public void setUp() {
-
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Rajbir\\drivers\\chromedriver.exe");
 		// intialise webdriver instance.
 		wd = new ChromeDriver();
@@ -30,28 +29,33 @@ public class Assign215dec {
 
 	@Test
 	public void validateUserAblePurchase() {
-		WebElement emailInput = wd.findElement(By.cssSelector("div.form-group:first-of-type input"));// email input
-																										// field
-		WebElement passInput = wd.findElement(By.cssSelector("div.form-group:last-of-type input"));// password input
-																									// input
-		emailInput.sendKeys("maninderajbir786@gmail.com");// email added
+		//// email inputfield
+		WebElement emailInput = wd.findElement(By.cssSelector("div.form-group:first-of-type input"));
+		//passwordinputFiled
+		WebElement passInput = wd.findElement(By.cssSelector("div.form-group:last-of-type input"));
+		emailInput.sendKeys("maninderajbir456@gmail.com");// email added
 		passInput.sendKeys("supermax");// password provided
 		wd.findElement(By.cssSelector("input[type='submit']")).click();// click on login
 		String titleOfpageAfterloginBtnClick = wd.getTitle();// get Title of my account page
 		Assert.assertEquals(titleOfpageAfterloginBtnClick, "My Account");// verify title of page
 		System.out.println("My account page's title is validated successfuly ");
-		WebElement phoneandPDAlink = wd.findElement(By.cssSelector("ul.nav.navbar-nav li:nth-of-type(6) a"));// phoneand pda linkonmyaccount pagefound
-																												
+		WebElement phoneandPDAlink = wd.findElement(By.cssSelector("ul.nav.navbar-nav li:nth-of-type(6) a"));
+		// phoneandpda link on page found
 		String phnAndPDA = phoneandPDAlink.getText();
 		Assert.assertEquals(phnAndPDA, "Phones & PDAs");
 		System.out.println("Phones & PDAs link is present  on  My Account page");
 		phoneandPDAlink.click();// click on phone and pdas link
 		System.out.println("phone and pda link successfuly clicked");
-
-		WebElement palmTreoProlink = wd.findElement(By.cssSelector(
+		//verify title of page
+		String titleOfPhoneandpdaPageTitle=wd.getTitle();
+		Assert.assertEquals(titleOfPhoneandpdaPageTitle,"Phones & PDAs");
+		System.out.println("Phones & PDAs page's title is validated successfuly ");
+		//find palm treo pro link on page
+        WebElement palmTreoProlink = wd.findElement(By.cssSelector(
 				"div.row:nth-of-type(2) div.product-layout.product-grid.col-lg-4.col-md-4.col-sm-6.col-xs-12:last-of-type h4 a"));
 		String palmtreopro = palmTreoProlink.getText();
-		Assert.assertEquals(palmtreopro, "Palm Treo Pro");// palm treo present on page
+		Assert.assertEquals(palmtreopro, "Palm Treo Pro");
+		// palm treo present on page
 		palmTreoProlink.click();// click on palm treo pro link
 		System.out.println(" Palm Treo Pro successfuly selected");
 		WebElement addToCartLink = wd.findElement(By.cssSelector("button[id='button-cart']"));
@@ -121,24 +125,26 @@ public class Assign215dec {
 		WebElement continueBtnPayment1 = wd.findElement(By.cssSelector("input[id='button-payment-method']"));
 		continueBtnPayment1.click();// click on continue button of payment method
 		System.out.println("payment method button clicked");
+		//find correctProduct selectedlink
 		WebElement selctedProductCorrectLink = wd.findElement(By.cssSelector("div.panel-body td.text-left a"));
-		sleep();
+		sleep();//find correctProduct selectedlink'Text
 		selctedProductCorrectLink.getText();
-		sleep();
+		sleep();// validtae selectedlink'Text with Palm Treo Pro
 		Assert.assertEquals(selctedProductCorrectLink.getText(), "Palm Treo Pro");
 		System.out.println("Correct product selected");
+		//find correctProduct'Quantity
 		WebElement selctedProductQuantity = wd
 				.findElement(By.cssSelector("table.table.table-bordered.table-hover tbody tr td:nth-of-type(3)"));
 		System.out.println("Correct quantity of product11 selected");
 		sleep();
-
-		Assert.assertEquals(selctedProductQuantity.getText(), "1");
+		////find correctProduct'Quantity is 1
+        Assert.assertEquals(selctedProductQuantity.getText(), "1");
 		System.out.println("Correct quantity of product selected");
 		sleep();
 
 		WebElement confirmOrderBtn = wd.findElement(By.cssSelector("input[id='button-confirm']"));// confirm button
 																									// clicked confirm
-																									// order
+				//Click on Confirm Button																					// order
 		confirmOrderBtn.click();
 		System.out.println("order confirmed");
 		WebElement orderPlacedTextLink = wd
@@ -167,7 +173,7 @@ public class Assign215dec {
 	@AfterMethod
 	public void tearDown() {
 		// closing the browser
-		// wd.close();
+		 wd.close();
 	}
 
 }
